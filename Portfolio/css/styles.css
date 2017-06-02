@@ -1,0 +1,60 @@
+body {
+  font-family: "Lato", sans-serif;
+  color: #2d3c49;
+  font-weight: 300;
+}
+
+.text-muted {
+  color: #7d97ad;
+}
+
+.text-thin {
+  font-weight: 100;
+}
+
+.title-logo {
+  margin-top: 20px;
+}
+
+.title-super {
+  font-size: 60px;
+}
+
+img, embed, object, video {
+  max-width: 100%
+}
+
+a {
+  padding: 1.5em;
+}
+
+@media screen and (max-width: 412px) {
+  #logo-container {
+    max-width: 25%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #splash, article img {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .col-md-6 {
+    padding: 0px;
+  }
+
+  #logo-container {
+    display: inline;
+    float: left;
+  }
+
+  #title-container {
+    text-align: right;
+    width: 95%;
+  }
+
+  header .col-md-12 {
+    display: block;
+  }
+}
