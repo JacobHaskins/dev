@@ -1,0 +1,59 @@
+Code Review General Checklist
+
+by Jacob Haskins
+
+1. Form
+
+1.1 Can extra whitespace be deleted?
+1.2 Are all needed semicolons and parentheses present?
+1.3 Are naming conventinos consistent within the file?
+1.4 Is indentation consistent within the file?
+1.5 Delete code instead of commenting it out.
+1.6 Delete stray logging statements and dev comments.
+1.7 No unresolved TODOs should be left in the code.
+
+2. Composition
+
+2.1 Similar / repetitive code blocks should be refactored into functions.
+2.2 Are clear / descriptive variable names used (except for iterator / count variables)?
+2.3 Do changes to controller / logic / calculation code have unit test coverage?
+
+3. Functional
+
+3.1 Does the software still run?
+3.2 Does it run as expected / designed?
+3.3 Does it, in general, solve the asked design / bug fix objective?
+3.4 Can any global variables be replaced or have a lesser scope?
+3.5 Do functions avoid having side-effects / data mutations?
+3.6 Do loops (including recursion) have a set length / termination condition?
+3.7 If any code was refactored into new functions, do those functions actually exist instead of silently failing?
+3.8 Do the build scripts run?
+3.9 Do the unit tests run?
+
+4. Security
+
+4.1 Are all data inputs checked for correctness / safety?
+4.2 Are library calls trapping for error conditions?
+4.3 Are output values checked for correctness and / or encoded as needed?
+4.4 Are invalid parameter values handled?
+
+5. Documentation
+
+5.1 Do variables and functions have human-readable names?
+5.2 Is any unusual code / edge-case handling commented?
+5.3 Are data structures or units of measure explained?
+5.4 Is any incomplete code marked or otherwise removed?
+
+6. Testing
+
+6.1 Are arrays or other list structures checked for out-of-bounds conditions?
+6.2 Is this code testable?
+6.3 Do unit tests exist and cover this code?
+6.4 Do unit tests of the code actually cover the scenario described in the change request?
+
+7. User Interface
+
+7.1 Are the UI changes consistent with the rest of the application, or otherwise as specified?
+7.2 Can the UI be improved to require less human interaction to accomplish its goal (i.e. 2 clicks instead of 3)?
+7.3 Are the UI components handicap accessible?
+7.4 Are the UI strings localized instead of hard-coded?
