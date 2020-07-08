@@ -35,19 +35,48 @@ function anagramsCounter(dictionary, query) {
 }
 
 //test cases
-function expectToEqual(testName, expected, actual) {
-    if(expected.length !== actual.length 
-            || JSON.stringify(expected) !== JSON.stringify(actual)) {
-        console.log(testName + ': FAIL\nexpected: ' + expected + '\nactual: ' + actual);
-    } else {
-        console.log(testName + ': PASS');
+let expect = {
+    to: {
+        equal: function (expected, actual) {
+            if(expected.length !== actual.length 
+                    || JSON.stringify(expected) !== JSON.stringify(actual)) {
+                console.log('\tFAIL\nexpected: ' + expected + '\nactual: ' + actual);
+            } else {
+                console.log('\tPASS');
+            }
+        }
     }
 }
 
-expectToEqual('T - empty query', [], anagramsCounter(['bear', 'bare', 'beets'], []));
-expectToEqual('T - matching query', [2], anagramsCounter(['bear', 'bare', 'beets'], ['brae']));
-expectToEqual('T - non-matching query', [0], anagramsCounter(['bear', 'bare', 'beets'], ['xyz']));
-expectToEqual('T - matching and non-matching query', [2, 0], anagramsCounter(['bear', 'bare', 'beets'], ['brae', 'xyz']));
-expectToEqual('T - bad query', [0], anagramsCounter(['bear', 'bare', 'beets'], [3]));
-expectToEqual('T - non-array args, with match', [1], anagramsCounter('bare', 'brae'));
-expectToEqual('T - non-array args, without match', [0], anagramsCounter('bare', 'xyz'));
+let it = function (label, callback) {
+    console.log(label + ':');
+    callback();
+}
+
+it('should test an empty query', () => {
+    expect.to.equal([], anagramsCounter(['bear', 'bare', 'beets'], []));
+});
+
+it('should test an matching query', () => {
+    expect.to.equal([2], anagramsCounter(['bear', 'bare', 'beets'], ['brae']));
+});
+
+it('should test an non-matching query', () => {
+    expect.to.equal([0], anagramsCounter(['bear', 'bare', 'beets'], ['xyz']));
+});
+
+it('should test an matching and non-matching query', () => {
+    expect.to.equal([2, 0], anagramsCounter(['bear', 'bare', 'beets'], ['brae', 'xyz']));
+});
+
+it('should test a bad query', () => {
+    expect.to.equal([0], anagramsCounter(['bear', 'bare', 'beets'], [3]));
+});
+
+it('should test non-array args, with match', () => {
+    expect.to.equal([1], anagramsCounter('bare', 'brae'));
+});
+
+it('should test non-array args, without match', () => {
+    expect.to.equal([0], anagramsCounter('bare', 'xyz'));
+});
