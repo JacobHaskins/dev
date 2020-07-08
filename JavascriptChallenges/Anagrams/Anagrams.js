@@ -18,25 +18,20 @@ function anagramsCounter(dictionary, query) {
     dictionary = dictionary || [];
     query = query || [];
 
-    let dictionaryCounts = {};
-    dictionary.forEach(entry => {
-        let sortedEntry = sortChars(entry); 
-        if(!dictionaryCounts[sortedEntry]) {
-            dictionaryCounts[sortedEntry] = 0;
-        }
-        dictionaryCounts[sortedEntry]++;
-    });
+    if(!Array.isArray(dictionary)) {
+        dictionary = [dictionary];
+    }
 
-    let results = [];
-    query.forEach(q => {
-        if(dictionaryCounts[sortChars(q)]) {
-            results.push(dictionaryCounts[sortChars(q)]);
-        } else {
-            results.push(0);
-        }
-    });
+    if(!Array.isArray(query)) {
+        query = [query];
+    }
 
-    return results;
+    let dictionaryCounts = dictionary.reduce((hashmap, entry) => ({
+        ...hashmap,
+        [sortChars(entry)]: (hashmap[sortChars(entry)] || 0) + 1
+    }), {});
+
+    return query.map(q => dictionaryCounts[sortChars(q)] || 0);
 }
 
 //test cases
@@ -54,3 +49,5 @@ expectToEqual('T - matching query', [2], anagramsCounter(['bear', 'bare', 'beets
 expectToEqual('T - non-matching query', [0], anagramsCounter(['bear', 'bare', 'beets'], ['xyz']));
 expectToEqual('T - matching and non-matching query', [2, 0], anagramsCounter(['bear', 'bare', 'beets'], ['brae', 'xyz']));
 expectToEqual('T - bad query', [0], anagramsCounter(['bear', 'bare', 'beets'], [3]));
+expectToEqual('T - non-array args, with match', [1], anagramsCounter('bare', 'brae'));
+expectToEqual('T - non-array args, without match', [0], anagramsCounter('bare', 'xyz'));
